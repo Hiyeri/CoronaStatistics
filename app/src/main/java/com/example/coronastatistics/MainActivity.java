@@ -34,9 +34,9 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
     /** Called when the user taps the Send button */
     public void sendMessage(View view) throws IOException {
         Intent intent = new Intent(this, CoronaActivity.class);
-        EditText editText = (EditText) findViewById(R.id.editText);
+        /** EditText editText = (EditText) findViewById(R.id.editText);
         String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
+        intent.putExtra(EXTRA_MESSAGE, message); */
         startActivity(intent);
     }
 }
