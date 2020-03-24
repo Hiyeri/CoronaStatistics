@@ -1,6 +1,7 @@
 package com.example.coronastatistics;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -14,6 +15,10 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 public class CoronaActivity extends AppCompatActivity implements View.OnClickListener {
@@ -24,6 +29,9 @@ public class CoronaActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_corona);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         btnMap = (Button) findViewById(R.id.btnMap);
         btnMap.setText("Google Maps");
@@ -73,9 +81,10 @@ public class CoronaActivity extends AppCompatActivity implements View.OnClickLis
             }
 
             Log.e("Corona", String.valueOf(response.isSuccessful()));
+
             try {
                 responseBody = response.body().string();
-                Log.e("Corona", String.valueOf(responseBody));
+                Log.e("Corona", responseBody);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -85,6 +94,30 @@ public class CoronaActivity extends AppCompatActivity implements View.OnClickLis
         ;
         @Override
         protected void onPostExecute(String result) {
+
+            // Parsing JSON Object according to its structure
+            // https://www.tutorialspoint.com/android/android_json_parser.htm
+            try {
+                JSONObject jsonObject = new JSONObject(responseBody);
+
+                // Getting JSON Node
+                JSONObject data = jsonObject.getJSONObject("data");
+
+                // Looping through all covid19Stats
+                JSONArray covid19Stats = data.getJSONArray("covid19Stats");
+                for (int i = 0; i < covid19Stats.length(); i++) {
+                    JSONObject params = covid19Stats.getJSONObject(i);
+                    String province = params.getString("province");
+                    Log.e("Country", province);
+                }
+
+
+                // JSONArray covid19Stats = data.getJSONArray("covid19Stats");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
             txtStats.setText(responseBody);
             Log.e("Henlo", "Henlo");
         }

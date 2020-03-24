@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-
     <TextView
         android:id="@+id/txtStats"
         android:layout_width="0dp"
@@ -33,4 +31,9 @@
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
