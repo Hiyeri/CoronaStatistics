@@ -3,4 +3,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="action_settings" />
     <string name="action_search" />
+    <string name="action_favorite" />
+    <string name="app_label" />
+    <string name="search_hint" />
 </resources>

@@ -17,7 +17,6 @@ import com.squareup.okhttp.OkHttpClient;
 import java.io.IOException;
 
 public class MainActivity<GetJSONTask> extends AppCompatActivity {
-
     public static String EXTRA_MESSAGE;
     private TextView coronaData;
     String url = "https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?country=Canada";
@@ -28,7 +27,7 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
@@ -36,6 +35,7 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
@@ -47,9 +47,9 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /* if (id == R.id.action_settings) {
             return true;
-        }
+        } */
 
         return super.onOptionsItemSelected(item);
     }
