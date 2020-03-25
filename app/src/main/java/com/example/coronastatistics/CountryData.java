@@ -15,9 +15,9 @@ public class CountryData {
     private String province;
     private String city;
     private String lastUpdate;
-    private String confirmed;
-    private String deaths;
-    private String recovered;
+    private int confirmed;
+    private int deaths;
+    private int recovered;
     private List<CountryData> countryDataList;
 
     public CountryData(String responsyBody) {
@@ -25,7 +25,7 @@ public class CountryData {
     }
 
     public CountryData(String country, String province, String city, String lastUpdate,
-                       String confirmed, String deaths, String recovered) {
+                       int confirmed, int deaths, int recovered) {
         this.country = country;
         this.province = province;
         this.city = city;
@@ -51,15 +51,15 @@ public class CountryData {
         return lastUpdate;
     }
 
-    public String getConfirmed() {
+    public int getConfirmed() {
         return confirmed;
     }
 
-    public String getDeaths() {
+    public int getDeaths() {
         return deaths;
     }
 
-    public String getRecovered() {
+    public int getRecovered() {
         return recovered;
     }
 
@@ -82,9 +82,9 @@ public class CountryData {
                 this.province = params.getString("province");
                 this.city = params.getString("city");
                 this.lastUpdate = params.getString("lastUpdate");
-                this.confirmed = params.getString("confirmed");
-                this.deaths = params.getString("deaths");
-                this.recovered = params.getString("recovered");
+                this.confirmed = params.getInt("confirmed");
+                this.deaths = params.getInt("deaths");
+                this.recovered = params.getInt("recovered");
 
                 countryDataList.add(new CountryData(country, province, city, lastUpdate, confirmed, deaths, recovered));
             }

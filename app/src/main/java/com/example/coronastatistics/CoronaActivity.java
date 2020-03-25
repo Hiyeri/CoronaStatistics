@@ -10,11 +10,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -22,12 +20,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CoronaActivity extends AppCompatActivity implements View.OnClickListener {
@@ -76,7 +69,7 @@ public class CoronaActivity extends AppCompatActivity implements View.OnClickLis
         startActivity(intent);
     }
 
-    /** Uses AsyncTask to create a task away from the main UI thread (to avoid
+    /* Uses AsyncTask to create a task away from the main UI thread (to avoid
      * a NetworkOnMainThreadException). This task takes a
      * URL string and uses it to create an HttpUrlConnection.
      * */
@@ -89,13 +82,12 @@ public class CoronaActivity extends AppCompatActivity implements View.OnClickLis
 
         @Override
         protected void onPreExecute() {
-            // txtStats.setText("Nichts");
         }
 
         @Override
         protected String doInBackground(String... urls) {
             Request request = new Request.Builder()
-                    .url("https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?country=US")
+                    .url("https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?country=Germany")
                     .get()
                     .addHeader("x-rapidapi-host", "covid-19-coronavirus-statistics.p.rapidapi.com")
                     .addHeader("x-rapidapi-key", "7e6ace8a6dmsh86c04f7b84eada4p15df6fjsn9c141732c6b9")

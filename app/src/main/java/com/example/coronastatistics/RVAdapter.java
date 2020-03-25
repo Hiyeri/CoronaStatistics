@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
@@ -28,6 +29,11 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull PersonViewHolder holder, int i) {
+        DecimalFormat formatter = new DecimalFormat("###,###");
+        String str_confirmed = "Confirmed: " + String.valueOf(formatter.format(countryData.get(i).getConfirmed()));
+        String str_death = "Deaths: " + String.valueOf(formatter.format(countryData.get(i).getDeaths()));
+        String str_recovered = "Recovered: " + String.valueOf(formatter.format(countryData.get(i).getRecovered()));
+
         // If there is no province, display country instead
         if(countryData.get(i).getProvince().equals("")) {
             holder.province.setText(countryData.get(i).getCountry());
@@ -35,10 +41,10 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
             holder.province.setText(countryData.get(i).getProvince());
         }
 
-        holder.confirmed.setText("Confirmed: " + countryData.get(i).getConfirmed());
-        holder.death.setText("Deaths: " + countryData.get(i).getDeaths());
-        holder.recovered.setText("Recovered: " + countryData.get(i).getRecovered());
-        holder.lastUpdated.setText("Last updated: " + countryData.get(i).getLastUpdate());
+        holder.confirmed.setText(str_confirmed);
+        holder.death.setText(str_death);
+        holder.recovered.setText(str_recovered);
+        holder.lastUpdated.setText(countryData.get(i).getLastUpdate());
     }
 
     @Override
