@@ -4,12 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,8 +16,6 @@ import android.widget.TextView;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -75,7 +71,7 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
         private String responseBody;
         private OkHttpClient client = new OkHttpClient();
         private Response response = null;
-        private List<CountryData> countryDataList;
+        private List<CoronaCountryData> coronaCountryDataList;
         private TextView confirmed_nr;
         private TextView deaths_nr;
         private TextView recovered_nr;
@@ -116,17 +112,17 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             // https://code.tutsplus.com/tutorials/getting-started-with-recyclerview-and-cardview-on-android--cms-23465
-            CountryData countryData = new CountryData(responseBody);
-            countryDataList = countryData.initializeData();
+            CoronaCountryData coronaCountryData = new CoronaCountryData(responseBody);
+            coronaCountryDataList = coronaCountryData.initializeData();
 
             // Get aggregated stats and set them on the text fields
             int sum_confirmed = 0;
             int sum_deaths = 0;
             int sum_recovered = 0;
-            for(int i = 0; i < countryDataList.size(); i++) {
-                sum_confirmed = sum_confirmed + countryDataList.get(i).getConfirmed();
-                sum_deaths = sum_deaths + countryDataList.get(i).getDeaths();
-                sum_recovered = sum_recovered + countryDataList.get(i).getRecovered();
+            for(int i = 0; i < coronaCountryDataList.size(); i++) {
+                sum_confirmed = sum_confirmed + coronaCountryDataList.get(i).getConfirmed();
+                sum_deaths = sum_deaths + coronaCountryDataList.get(i).getDeaths();
+                sum_recovered = sum_recovered + coronaCountryDataList.get(i).getRecovered();
             }
             DecimalFormat formatter = new DecimalFormat("###,###");
 
@@ -140,7 +136,7 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
             recovered_nr.setText(String.valueOf(formatter.format(sum_recovered)));
 
             lastUpdated = (TextView)findViewById(R.id.lastUpdated);
-            lastUpdated.setText(countryDataList.get(0).getLastUpdate());
+            lastUpdated.setText(coronaCountryDataList.get(0).getLastUpdate());
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.example.coronastatistics;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
-    List<CountryData> countryData;
+public class CoronaRVAdapter extends RecyclerView.Adapter<CoronaRVAdapter.PersonViewHolder>{
+    List<CoronaCountryData> coronaCountryData;
 
-    public RVAdapter(List<CountryData> countryData) {
-        this.countryData = countryData;
+    public CoronaRVAdapter(List<CoronaCountryData> coronaCountryData) {
+        this.coronaCountryData = coronaCountryData;
     }
 
     @Override
@@ -30,27 +29,27 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull PersonViewHolder holder, int i) {
         DecimalFormat formatter = new DecimalFormat("###,###");
-        String str_confirmed = "Confirmed: " + String.valueOf(formatter.format(countryData.get(i).getConfirmed()));
-        String str_death = "Deaths: " + String.valueOf(formatter.format(countryData.get(i).getDeaths()));
-        String str_recovered = "Recovered: " + String.valueOf(formatter.format(countryData.get(i).getRecovered()));
+        String str_confirmed = "Confirmed: " + String.valueOf(formatter.format(coronaCountryData.get(i).getConfirmed()));
+        String str_death = "Deaths: " + String.valueOf(formatter.format(coronaCountryData.get(i).getDeaths()));
+        String str_recovered = "Recovered: " + String.valueOf(formatter.format(coronaCountryData.get(i).getRecovered()));
 
         // If there is no province, display country instead
-        if(countryData.get(i).getProvince().equals("")) {
-            holder.province.setText(countryData.get(i).getCountry());
+        if(coronaCountryData.get(i).getProvince().equals("")) {
+            holder.province.setText(coronaCountryData.get(i).getCountry());
         } else {
-            holder.province.setText(countryData.get(i).getProvince());
+            holder.province.setText(coronaCountryData.get(i).getProvince());
         }
 
         holder.confirmed.setText(str_confirmed);
         holder.death.setText(str_death);
         holder.recovered.setText(str_recovered);
-        holder.lastUpdated.setText(countryData.get(i).getLastUpdate());
+        holder.lastUpdated.setText(coronaCountryData.get(i).getLastUpdate());
     }
 
     @Override
     public int getItemCount() {
         // Log.e("Count", countryData.get(0).g);
-        return countryData.size();
+        return coronaCountryData.size();
     }
 
     @Override

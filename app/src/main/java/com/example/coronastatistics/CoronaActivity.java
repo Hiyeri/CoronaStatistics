@@ -1,6 +1,5 @@
 package com.example.coronastatistics;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -78,7 +77,7 @@ public class CoronaActivity extends AppCompatActivity implements View.OnClickLis
         private String responseBody;
         private OkHttpClient client = new OkHttpClient();
         private Response response = null;
-        private List<CountryData> countryDataList;
+        private List<CoronaCountryData> coronaCountryDataList;
 
         @Override
         protected void onPreExecute() {
@@ -114,10 +113,10 @@ public class CoronaActivity extends AppCompatActivity implements View.OnClickLis
         @Override
         protected void onPostExecute(String result) {
             // https://code.tutsplus.com/tutorials/getting-started-with-recyclerview-and-cardview-on-android--cms-23465
-            CountryData countryData = new CountryData(responseBody);
-            countryDataList = countryData.initializeData();
+            CoronaCountryData coronaCountryData = new CoronaCountryData(responseBody);
+            coronaCountryDataList = coronaCountryData.initializeData();
 
-            RVAdapter adapter = new RVAdapter(countryDataList);
+            CoronaRVAdapter adapter = new CoronaRVAdapter(coronaCountryDataList);
             recyclerView.setAdapter(adapter);
         }
     }

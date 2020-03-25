@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CountryData {
+public class CoronaCountryData {
     private String responseBody;
     private String country;
     private String province;
@@ -18,14 +18,14 @@ public class CountryData {
     private int confirmed;
     private int deaths;
     private int recovered;
-    private List<CountryData> countryDataList;
+    private List<CoronaCountryData> coronaCountryDataList;
 
-    public CountryData(String responsyBody) {
+    public CoronaCountryData(String responsyBody) {
         this.responseBody = responsyBody;
     }
 
-    public CountryData(String country, String province, String city, String lastUpdate,
-                       int confirmed, int deaths, int recovered) {
+    public CoronaCountryData(String country, String province, String city, String lastUpdate,
+                             int confirmed, int deaths, int recovered) {
         this.country = country;
         this.province = province;
         this.city = city;
@@ -64,7 +64,7 @@ public class CountryData {
     }
 
     protected List initializeData() {
-        countryDataList = new ArrayList<>();
+        coronaCountryDataList = new ArrayList<>();
 
         // Parsing JSON Object according to its structure
         // https://www.tutorialspoint.com/android/android_json_parser.htm
@@ -86,14 +86,14 @@ public class CountryData {
                 this.deaths = params.getInt("deaths");
                 this.recovered = params.getInt("recovered");
 
-                countryDataList.add(new CountryData(country, province, city, lastUpdate, confirmed, deaths, recovered));
+                coronaCountryDataList.add(new CoronaCountryData(country, province, city, lastUpdate, confirmed, deaths, recovered));
             }
-            Log.e("Data", String.valueOf(countryDataList));
+            Log.e("Data", String.valueOf(coronaCountryDataList));
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return countryDataList;
+        return coronaCountryDataList;
     }
 }
