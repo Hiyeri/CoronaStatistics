@@ -35,9 +35,6 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ImageView imageView = (ImageView) findViewById(R.id.image);
-        imageView.setImageResource(R.drawable.ic_map);
-
         new MainAsyncCoronaTask().execute();
     }
 
