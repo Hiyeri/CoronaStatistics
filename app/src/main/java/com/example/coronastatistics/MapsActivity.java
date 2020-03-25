@@ -85,13 +85,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap = googleMap;
 
-        Intent inputCountry = getIntent();
-        String inCountry = inputCountry.getStringExtra("country");
+        Intent intent_country = getIntent();
+        String transmittedCountry = intent_country.getStringExtra("country");
 
-
+        // transmittedCountry = "Iran";
 
         for (int i=0; i<strEurope.length; i++)
-            if (inCountry.equals(strEurope[i])){
+            if (transmittedCountry.equals(strEurope[i])){
                 //Log.d("Test",inCountry);
                 //Log.d("Test", strEurope[0]);
                 mMap.addMarker(new MarkerOptions().position(geoEurope[i]));

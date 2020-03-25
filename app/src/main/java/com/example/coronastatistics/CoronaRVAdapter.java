@@ -34,21 +34,16 @@ public class CoronaRVAdapter extends RecyclerView.Adapter<CoronaRVAdapter.Person
         String str_recovered = "Recovered: " + String.valueOf(formatter.format(coronaCountryData.get(i).getRecovered()));
 
         // If there is no province, display country instead
-        if(coronaCountryData.get(i).getProvince().equals("")) {
-            holder.province.setText(coronaCountryData.get(i).getCountry());
-        } else {
+        if(!coronaCountryData.get(i).getProvince().equals("")) {
             holder.province.setText(coronaCountryData.get(i).getProvince());
+            holder.confirmed.setText(str_confirmed);
+            holder.death.setText(str_death);
+            holder.recovered.setText(str_recovered);
         }
-
-        holder.confirmed.setText(str_confirmed);
-        holder.death.setText(str_death);
-        holder.recovered.setText(str_recovered);
-        holder.lastUpdated.setText(coronaCountryData.get(i).getLastUpdate());
     }
 
     @Override
     public int getItemCount() {
-        // Log.e("Count", countryData.get(0).g);
         return coronaCountryData.size();
     }
 
