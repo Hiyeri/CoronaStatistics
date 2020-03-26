@@ -142,6 +142,7 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
             recovered = (TextView) findViewById(R.id.recovered);
             recovered.setText(str_recovered);
 
+
             lastUpdated = (TextView) findViewById(R.id.lastUpdated);
             lastUpdated.setText(coronaCountryDataList.get(0).getLastUpdate());
         }

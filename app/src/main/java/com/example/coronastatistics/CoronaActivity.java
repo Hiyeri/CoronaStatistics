@@ -32,15 +32,7 @@ public class CoronaActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        int i = 0;
-        if(i == 0) {
-            setContentView(R.layout.activity_corona_noprovince);
-            Log.e("View", Integer.toString(i));
-        } else {
-            // setContentView(R.layout.test);
-            Log.e("View", Integer.toString(i));
-        }
+        setContentView(R.layout.activity_corona);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -139,7 +131,22 @@ public class CoronaActivity extends AppCompatActivity implements View.OnClickLis
             coronaCountryDataList = coronaCountryData.initializeData();
 
             country = (TextView) findViewById(R.id.country);
-            country.setText(coronaCountryDataList.get(0).getCountry());
+
+            // Transform country names
+            // according to https://www.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6)
+            String val_country = coronaCountryDataList.get(0).getCountry();
+            switch (val_country) {
+                case "US":
+                    country.setText("United States");
+                    break;
+                case "Korea, South":
+                    country.setText("South Korea");
+                    break;
+                case "Czechia":
+                    country.setText("Czech Republik");
+                default:
+                    country.setText(coronaCountryDataList.get(0).getCountry());
+            }
 
             int sum_confirmed = 0;
             int sum_deaths = 0;
@@ -147,6 +154,7 @@ public class CoronaActivity extends AppCompatActivity implements View.OnClickLis
             for(int i = 0; i < coronaCountryDataList.size(); i++) {
                 sum_confirmed = sum_confirmed + coronaCountryDataList.get(i).getConfirmed();
                 sum_deaths = sum_deaths + coronaCountryDataList.get(i).getDeaths();
+                sum_recovered = sum_recovered + coronaCountryDataList.get(i).getRecovered();
             }
 
             String str_confirmed = "Confirmed \n" + String.valueOf(formatter.format(sum_confirmed));
@@ -164,8 +172,12 @@ public class CoronaActivity extends AppCompatActivity implements View.OnClickLis
             lastUpdated = (TextView) findViewById(R.id.lastUpdated);
             lastUpdated.setText(coronaCountryDataList.get(0).getLastUpdate());
 
-            CoronaRVAdapter adapter = new CoronaRVAdapter(coronaCountryDataList);
-            recyclerView.setAdapter(adapter);
+            // If there is no city-province pair, there is only info about the country
+            // as a whole. In this case the card view will not be displayed
+            if(coronaCountryDataList.size() > 1) {
+                CoronaRVAdapter adapter = new CoronaRVAdapter(coronaCountryDataList);
+                recyclerView.setAdapter(adapter);
+            }
         }
     }
 
