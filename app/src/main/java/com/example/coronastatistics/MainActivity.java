@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,8 +26,9 @@ import java.util.List;
 public class MainActivity<GetJSONTask> extends AppCompatActivity {
     public static String EXTRA_MESSAGE;
     private TextView coronaData;
-    String url = "https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?country=Canada";
+    String url = "https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?";
     OkHttpClient client = new OkHttpClient();
+    EditText selection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +57,14 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
 
     /** Called when the user taps the Send button */
     public void sendMessage(View view) throws IOException {
-        // new AsyncCoronaTask(url).execute();
-        Intent intent = new Intent(this, CoronaActivity.class);
-        startActivity(intent);
+        selection = (EditText) findViewById(R.id.selection);
+
+        /* Pass data to next activity
+        * 'intent_currentActivity' is used when defining a new intent to transmit data
+        * 'intent_lastActivity' is used when fetching transmitted data */
+        Intent intent_main = new Intent(this, CoronaActivity.class);
+        intent_main.putExtra("country", selection.getText().toString());
+        startActivity(intent_main);
     }
 
     /* Uses AsyncTask to create a task away from the main UI thread (to avoid
@@ -69,9 +77,9 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
         private OkHttpClient client = new OkHttpClient();
         private Response response = null;
         private List<CoronaCountryData> coronaCountryDataList;
-        private TextView confirmed_nr;
-        private TextView deaths_nr;
-        private TextView recovered_nr;
+        private TextView confirmed;
+        private TextView deaths;
+        private TextView recovered;
         private TextView lastUpdated;
 
         @Override
@@ -102,7 +110,6 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            Log.e("Confirmed", "hii");
             return response.toString();
         }
 
@@ -123,16 +130,20 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
             }
             DecimalFormat formatter = new DecimalFormat("###,###");
 
-            confirmed_nr = (TextView)findViewById(R.id.confirmed_nr);
-            confirmed_nr.setText(String.valueOf(formatter.format(sum_confirmed)));
+            String str_confirmed = "Confirmed \n" + String.valueOf(formatter.format(sum_confirmed));
+            confirmed = (TextView) findViewById(R.id.confirmed);
+            confirmed.setText(str_confirmed);
 
-            deaths_nr = (TextView)findViewById(R.id.deaths_nr);
-            deaths_nr.setText(String.valueOf(formatter.format(sum_deaths)));
+            String str_deaths = "Deaths \n" + String.valueOf(formatter.format(sum_deaths));
+            deaths = (TextView) findViewById(R.id.deaths);
+            deaths.setText(str_deaths);
 
-            recovered_nr = (TextView)findViewById(R.id.recovered_nr);
-            recovered_nr.setText(String.valueOf(formatter.format(sum_recovered)));
+            String str_recovered = "Recovered \n" + String.valueOf(formatter.format(sum_recovered));
+            recovered = (TextView) findViewById(R.id.recovered);
+            recovered.setText(str_recovered);
 
-            lastUpdated = (TextView)findViewById(R.id.lastUpdated);
+
+            lastUpdated = (TextView) findViewById(R.id.lastUpdated);
             lastUpdated.setText(coronaCountryDataList.get(0).getLastUpdate());
         }
     }
