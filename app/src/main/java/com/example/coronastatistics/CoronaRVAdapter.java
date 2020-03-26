@@ -34,6 +34,7 @@ public class CoronaRVAdapter extends RecyclerView.Adapter<CoronaRVAdapter.Person
         String str_recovered = "Recovered: " + String.valueOf(formatter.format(coronaCountryData.get(i).getRecovered()));
 
         // If there is no province, display country instead
+<<<<<<< HEAD
         if(coronaCountryData.get(i).getProvince().equals("")) {
             holder.province.setText(coronaCountryData.get(i).getCountry());
         } else {
@@ -44,6 +45,14 @@ public class CoronaRVAdapter extends RecyclerView.Adapter<CoronaRVAdapter.Person
         holder.death.setText(str_death);
         holder.recovered.setText(str_recovered);
         holder.lastUpdated.setText(coronaCountryData.get(i).getLastUpdate());
+=======
+        if(!coronaCountryData.get(i).getProvince().equals("")) {
+            holder.province.setText(coronaCountryData.get(i).getProvince());
+            holder.confirmed.setText(str_confirmed);
+            holder.death.setText(str_death);
+            holder.recovered.setText(str_recovered);
+        }
+>>>>>>> parent of f702e67... Merge pull request #9 from Hiyeri/corona
     }
 
     @Override
