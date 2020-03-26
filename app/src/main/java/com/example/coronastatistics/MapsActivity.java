@@ -34,7 +34,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final LatLng LATVIA = new LatLng(57.083053, 25.955585);
     private static final LatLng LIECHTENSTEIN = new LatLng(47.134593, 9.559855);
     private static final LatLng LITHUANIA = new LatLng(55.383243, 24.218256);
-    private static final LatLng LUEXEMBOURG = new LatLng(49.706117, 6.135483);
+    private static final LatLng LUXEMBOURG = new LatLng(49.706117, 6.135483);
     private static final LatLng MALTA = new LatLng(35.874363, 14.458243);
     private static final LatLng NETHERLANDS = new LatLng(51.993476, 5.430255);
     private static final LatLng NORTHMACEDONIA = new LatLng(41.607156, 21.795942);
@@ -75,11 +75,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         LatLng [] geoEurope = {ALBANIA, ANDORRA, BELGIUM, BOSNIAANDHERZEGOVINA, BULGARIA, DENMARK, GERMANY, ESTONIA, FINLAND, FRANCE, GREECE, GREATBRITAIN,
-                IRELAND, ICELAND, ITALY, KOSOVO, CROATIA, LATVIA, LIECHTENSTEIN, LITHUANIA, LUEXEMBOURG, MALTA, NETHERLANDS, NORTHMACEDONIA, NORWAY, AUSTRIA, POLAND, PORTUGAL,
+                IRELAND, ICELAND, ITALY, KOSOVO, CROATIA, LATVIA, LIECHTENSTEIN, LITHUANIA, LUXEMBOURG, MALTA, NETHERLANDS, NORTHMACEDONIA, NORWAY, AUSTRIA, POLAND, PORTUGAL,
                 ROMANIA, RUSSIA, SANMARINO, SWEDEN, SWITZERLAND, SLOVAKIA, SLOVENIA, SPAIN, CZECHREPUBLIC, TURKEY, UKRAINE, HUNGARY, VATICANCITY, BELARUS, CHINA, SOUTHKOREA, IRAN};
 
         String [] strEurope = {"Albania", "Andorra", "Belgium", "Bosniaandherzegovina", "Bulgaria", "Denmark", "Germany", "Estonia", "Finland", "France", "Greece", "Greatbritain",
-                "Ireland", "Iceland", "Italy", "Kosovo", "Croatia", "Latvia", "Liechtenstein", "Lithuania", "Luexembourg", "Malta", "Netherlands", "Northmacedonia",
+                "Ireland", "Iceland", "Italy", "Kosovo", "Croatia", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Malta", "Netherlands", "Northmacedonia",
                 "Norway", "Austria", "Poland", "Portugal", "Romania", "Russia", "Sanmarino", "Sweden", "Switzerland", "Slovakia", "Slovenia", "Spain", "Czechrepublic", "Turkey",
                 "Ukraine", "Hungary", "Vaticancity", "Belarus", "China", "Southkorea", "Iran"};
 
@@ -87,6 +87,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Intent intent_country = getIntent();
         String transmittedCountry = intent_country.getStringExtra("country");
+        transmittedCountry.replaceAll("\\s", "");
+
+
 
         // transmittedCountry = "Germany";
 
