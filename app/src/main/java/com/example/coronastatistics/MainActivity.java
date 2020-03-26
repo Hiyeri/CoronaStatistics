@@ -59,12 +59,21 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
     public void sendMessage(View view) throws IOException {
         selection = (EditText) findViewById(R.id.selection);
 
-        /* Pass data to next activity
-        * 'intent_currentActivity' is used when defining a new intent to transmit data
-        * 'intent_lastActivity' is used when fetching transmitted data */
-        Intent intent_main = new Intent(this, CoronaActivity.class);
-        intent_main.putExtra("country", selection.getText().toString());
-        startActivity(intent_main);
+
+        String inputCountry = selection.getText().toString().replaceAll("\\s+", "");
+        //if (inputCountry != "") {
+            inputCountry = inputCountry.substring(0, 1).toUpperCase() + inputCountry.substring(1).toLowerCase();
+        //}
+            /* Pass data to next activity
+             * 'intent_currentActivity' is used when defining a new intent to transmit data
+             * 'intent_lastActivity' is used when fetching transmitted data */
+            Intent intent_main = new Intent(this, CoronaActivity.class);
+            Log.d("Test", inputCountry);
+            intent_main.putExtra("country", inputCountry);
+            startActivity(intent_main);
+
+
+
     }
 
     /* Uses AsyncTask to create a task away from the main UI thread (to avoid

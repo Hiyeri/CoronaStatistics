@@ -4,6 +4,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -87,11 +88,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Intent intent_country = getIntent();
         String transmittedCountry = intent_country.getStringExtra("country");
-        transmittedCountry.replaceAll("\\s", "");
-
-
-
-        // transmittedCountry = "Germany";
 
         for (int i=0; i<strEurope.length; i++)
             if (transmittedCountry.equals(strEurope[i])){
