@@ -132,11 +132,7 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
             recovered_nr = (TextView)findViewById(R.id.recovered_nr);
             recovered_nr.setText(String.valueOf(formatter.format(sum_recovered)));
 
-<<<<<<< HEAD
             lastUpdated = (TextView)findViewById(R.id.lastUpdated);
-=======
-            lastUpdated = (TextView) findViewById(R.id.lastUpdated);
->>>>>>> parent of f702e67... Merge pull request #9 from Hiyeri/corona
             lastUpdated.setText(coronaCountryDataList.get(0).getLastUpdate());
         }
     }

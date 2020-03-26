@@ -31,15 +31,7 @@ public class CoronaActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        int i = 0;
-        if(i == 0) {
-            setContentView(R.layout.activity_corona_noprovince);
-            Log.e("View", Integer.toString(i));
-        } else {
-            // setContentView(R.layout.test);
-            Log.e("View", Integer.toString(i));
-        }
+        setContentView(R.layout.activity_corona);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -124,35 +116,6 @@ public class CoronaActivity extends AppCompatActivity implements View.OnClickLis
             CoronaCountryData coronaCountryData = new CoronaCountryData(responseBody);
             coronaCountryDataList = coronaCountryData.initializeData();
 
-<<<<<<< HEAD
-=======
-            country = (TextView) findViewById(R.id.country);
-            country.setText(coronaCountryDataList.get(0).getCountry());
-
-            int sum_confirmed = 0;
-            int sum_deaths = 0;
-            int sum_recovered = 0;
-            for(int i = 0; i < coronaCountryDataList.size(); i++) {
-                sum_confirmed = sum_confirmed + coronaCountryDataList.get(i).getConfirmed();
-                sum_deaths = sum_deaths + coronaCountryDataList.get(i).getDeaths();
-            }
-
-            String str_confirmed = "Confirmed \n" + String.valueOf(formatter.format(sum_confirmed));
-            confirmed = (TextView) findViewById(R.id.confirmed);
-            confirmed.setText(str_confirmed);
-
-            String str_deaths = "Deaths \n" + String.valueOf(formatter.format(sum_deaths));
-            deaths = (TextView) findViewById(R.id.deaths);
-            deaths.setText(str_deaths);
-
-            String str_recovered = "Recovered \n" + String.valueOf(formatter.format(sum_recovered));
-            recovered = (TextView) findViewById(R.id.recovered);
-            recovered.setText(str_recovered);
-
-            lastUpdated = (TextView) findViewById(R.id.lastUpdated);
-            lastUpdated.setText(coronaCountryDataList.get(0).getLastUpdate());
-
->>>>>>> parent of f702e67... Merge pull request #9 from Hiyeri/corona
             CoronaRVAdapter adapter = new CoronaRVAdapter(coronaCountryDataList);
             recyclerView.setAdapter(adapter);
         }
