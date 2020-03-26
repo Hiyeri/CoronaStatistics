@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/txtStats"
+        android:id="@+id/selection"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -16,12 +16,12 @@
         android:hint="Country"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintEnd_toStartOf="@+id/btnCountry"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnCountry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="34dp"
@@ -33,14 +33,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/txtStats" />
+        app:layout_constraintStart_toEndOf="@+id/selection" />
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar" />
 
     <TextView
-        android:id="@+id/worldwide"
+        android:id="@+id/country"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
@@ -62,14 +62,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
         android:gravity="center"
-        android:text="Confirmed"
+        android:lineSpacingExtra="8sp"
         android:textColor="#E17644"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/deaths"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/worldwide" />
+        app:layout_constraintTop_toBottomOf="@+id/country" />
 
     <TextView
         android:id="@+id/deaths"
@@ -77,13 +77,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
         android:gravity="center"
-        android:text="Deaths"
+        android:lineSpacingExtra="8sp"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/recovered"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/confirmed"
-        app:layout_constraintTop_toBottomOf="@+id/worldwide" />
+        app:layout_constraintTop_toBottomOf="@+id/country" />
 
     <TextView
         android:id="@+id/recovered"
@@ -91,13 +91,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
         android:gravity="center"
-        android:text="Recovered"
+        android:lineSpacingExtra="8sp"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/deaths"
-        app:layout_constraintTop_toBottomOf="@+id/worldwide" />
+        app:layout_constraintTop_toBottomOf="@+id/country" />
 
     <TextView
         android:id="@+id/lastUpdated"
@@ -107,42 +107,5 @@
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/confirmed_nr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="95dp"
-        android:textColor="#E17644"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/deaths_nr"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/worldwide" />
-
-    <TextView
-        android:id="@+id/deaths_nr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="95dp"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/recovered_nr"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/confirmed_nr"
-        app:layout_constraintTop_toBottomOf="@+id/worldwide" />
-
-    <TextView
-        android:id="@+id/recovered_nr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="95dp"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/deaths_nr"
-        app:layout_constraintTop_toBottomOf="@+id/worldwide" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

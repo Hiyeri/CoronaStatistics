@@ -29,26 +29,38 @@ public class CoronaRVAdapter extends RecyclerView.Adapter<CoronaRVAdapter.Person
     @Override
     public void onBindViewHolder(@NonNull PersonViewHolder holder, int i) {
         DecimalFormat formatter = new DecimalFormat("###,###");
-        String str_confirmed = "Confirmed: " + String.valueOf(formatter.format(coronaCountryData.get(i).getConfirmed()));
-        String str_death = "Deaths: " + String.valueOf(formatter.format(coronaCountryData.get(i).getDeaths()));
-        String str_recovered = "Recovered: " + String.valueOf(formatter.format(coronaCountryData.get(i).getRecovered()));
 
-        // If there is no province, display country instead
-        if(coronaCountryData.get(i).getProvince().equals("")) {
-            holder.province.setText(coronaCountryData.get(i).getCountry());
+        // Linebreak if number is too big
+        if (coronaCountryData.get(i).getConfirmed() > 10000 || coronaCountryData.get(i).getDeaths() > 10000 ||
+        coronaCountryData.get(i).getRecovered() > 10000) {
+            String str_confirmed = "Confirmed: \n" + String.valueOf(formatter.format(coronaCountryData.get(i).getConfirmed()));
+            holder.confirmed.setText(str_confirmed);
+            String str_death = "Deaths: \n" + String.valueOf(formatter.format(coronaCountryData.get(i).getDeaths()));
+            holder.death.setText(str_death);
         } else {
-            holder.province.setText(coronaCountryData.get(i).getProvince());
+            String str_confirmed = "Confirmed: " + String.valueOf(formatter.format(coronaCountryData.get(i).getConfirmed()));
+            holder.confirmed.setText(str_confirmed);
+            String str_death = "Deaths: " + String.valueOf(formatter.format(coronaCountryData.get(i).getDeaths()));
+            holder.death.setText(str_death);
         }
 
-        holder.confirmed.setText(str_confirmed);
-        holder.death.setText(str_death);
+        holder.city.setText(coronaCountryData.get(i).getCity());
+        holder.province.setText(coronaCountryData.get(i).getProvince());
+
+        String str_recovered = "Recovered: " + String.valueOf(formatter.format(coronaCountryData.get(i).getRecovered()));
         holder.recovered.setText(str_recovered);
-        holder.lastUpdated.setText(coronaCountryData.get(i).getLastUpdate());
+
+        /* // If there is no province, display country instead
+        if(!coronaCountryData.get(i).getProvince().equals("")) {
+            holder.province.setText(coronaCountryData.get(i).getProvince());
+            holder.confirmed.setText(str_confirmed);
+            holder.death.setText(str_death);
+            holder.recovered.setText(str_recovered);
+        } */
     }
 
     @Override
     public int getItemCount() {
-        // Log.e("Count", countryData.get(0).g);
         return coronaCountryData.size();
     }
 
@@ -59,6 +71,7 @@ public class CoronaRVAdapter extends RecyclerView.Adapter<CoronaRVAdapter.Person
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
+        TextView city;
         TextView province;
         TextView confirmed;
         TextView death;
@@ -68,6 +81,7 @@ public class CoronaRVAdapter extends RecyclerView.Adapter<CoronaRVAdapter.Person
         PersonViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.cardView);
+            city = (TextView)itemView.findViewById(R.id.city);
             province = (TextView)itemView.findViewById(R.id.province);
             confirmed = (TextView)itemView.findViewById(R.id.confirmed);
             death = (TextView)itemView.findViewById(R.id.death);
