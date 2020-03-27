@@ -23,12 +23,13 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class MainActivity<GetJSONTask> extends AppCompatActivity {
+public class MainActivity<GetJSONTask> extends AppCompatActivity implements View.OnClickListener {
     public static String EXTRA_MESSAGE;
     private TextView coronaData;
     String url = "https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats?";
     OkHttpClient client = new OkHttpClient();
     EditText selection;
+    Button btnCountry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,9 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        btnCountry = (Button) findViewById(R.id.btnCountry);
+        btnCountry.setOnClickListener((View.OnClickListener) this);
 
         new MainAsyncCoronaTask().execute();
     }
@@ -55,7 +59,24 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /** Called when the user taps the Send button */
+    @Override
+    public void onClick(View view) {
+        selection = (EditText) findViewById(R.id.selection);
+
+        String inputCountry = selection.getText().toString().replaceAll("\\s+", "");
+        //if (inputCountry != "") {
+        inputCountry = inputCountry.substring(0, 1).toUpperCase() + inputCountry.substring(1).toLowerCase();
+        //}
+        /* Pass data to next activity
+         * 'intent_currentActivity' is used when defining a new intent to transmit data
+         * 'intent_lastActivity' is used when fetching transmitted data */
+        Intent intent_main = new Intent(this, CoronaActivity.class);
+        Log.d("Test", inputCountry);
+        intent_main.putExtra("country", inputCountry);
+        startActivity(intent_main);
+    }
+
+    /** Called when the user taps the Send button *//*
     public void sendMessage(View view) throws IOException {
         selection = (EditText) findViewById(R.id.selection);
 
@@ -64,18 +85,16 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity {
         //if (inputCountry != "") {
             inputCountry = inputCountry.substring(0, 1).toUpperCase() + inputCountry.substring(1).toLowerCase();
         //}
-            /* Pass data to next activity
+            *//* Pass data to next activity
              * 'intent_currentActivity' is used when defining a new intent to transmit data
-             * 'intent_lastActivity' is used when fetching transmitted data */
+             * 'intent_lastActivity' is used when fetching transmitted data *//*
             Intent intent_main = new Intent(this, CoronaActivity.class);
             Log.d("Test", inputCountry);
             intent_main.putExtra("country", inputCountry);
             startActivity(intent_main);
 
-
-
     }
-
+*/
     /* Uses AsyncTask to create a task away from the main UI thread (to avoid
      * a NetworkOnMainThreadException). This task takes a
      * URL string and uses it to create an HttpUrlConnection.
