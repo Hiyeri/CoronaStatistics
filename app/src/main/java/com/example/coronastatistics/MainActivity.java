@@ -129,8 +129,6 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity implements View
                 e.printStackTrace();
             }
 
-            // Log.e("Corona", String.valueOf(response.isSuccessful()));
-
             try {
                 responseBody = response.body().string();
                 Log.e("Corona", responseBody);
@@ -143,7 +141,7 @@ public class MainActivity<GetJSONTask> extends AppCompatActivity implements View
 
         @Override
         protected void onPostExecute(String result) {
-            // https://code.tutsplus.com/tutorials/getting-started-with-recyclerview-and-cardview-on-android--cms-23465
+            // Parsing JSON Object according to its structure
             CoronaCountryData coronaCountryData = new CoronaCountryData(responseBody);
             coronaCountryDataList = coronaCountryData.initializeData();
 
